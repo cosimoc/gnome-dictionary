@@ -210,7 +210,6 @@ static gint n_toggle_state = G_N_ELEMENTS (toggle_state);
 static void
 gdict_window_ensure_menu_state (GdictWindow *window)
 {
-  GtkWidget *item;
   gint i;
   gboolean is_sensitive;
 
@@ -398,8 +397,6 @@ gdict_window_error_cb (GdictContext *context,
 		       const GError *error,
 		       GdictWindow  *window)
 {
-  gint count;
-  
   gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (window)), NULL);
   
   if (window->status && window->statusbar_visible)
@@ -1006,8 +1003,6 @@ static void
 gdict_window_cmd_view_sidebar (GtkAction   *action,
 			       GdictWindow *window)
 {
-  gboolean is_active;
-  
   g_assert (GDICT_IS_WINDOW (window));
 
   if (window->sidebar_visible)
@@ -1553,8 +1548,6 @@ gdict_window_drag_data_received_cb (GtkWidget        *widget,
   text = (gchar *) gtk_selection_data_get_text (data);
   if (text)
     {
-      gchar *title;
-      
       gtk_entry_set_text (GTK_ENTRY (window->entry), text);
 
       gdict_window_set_word (window, text, NULL);
@@ -1658,7 +1651,6 @@ static void
 gdict_window_style_set (GtkWidget *widget,
 			GtkStyle  *old_style)
 {
-  GdictWindow *window;
 
   if (GTK_WIDGET_CLASS (gdict_window_parent_class)->style_set)
     GTK_WIDGET_CLASS (gdict_window_parent_class)->style_set (widget, old_style);
@@ -1698,7 +1690,6 @@ gdict_window_constructor (GType                  type,
   GtkWidget *button;
   GtkActionGroup *action_group;
   GtkAccelGroup *accel_group;
-  GtkAction *action;
   PangoFontDescription *font_desc;
   gchar *font_name, *sidebar_page;
   GError *error;

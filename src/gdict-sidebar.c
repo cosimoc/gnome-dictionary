@@ -457,7 +457,6 @@ gdict_sidebar_remove_page (GdictSidebar *sidebar,
 {
   GdictSidebarPrivate *priv;
   SidebarPage *page;
-  GtkWidget *menu_item;
   GList *children, *l;
   
   g_return_if_fail (GDICT_IS_SIDEBAR (sidebar));

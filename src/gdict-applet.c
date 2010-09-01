@@ -504,7 +504,6 @@ gdict_applet_draw (GdictApplet *applet)
   GdictAppletPrivate *priv = applet->priv;
   GtkWidget *box;
   GtkWidget *hbox;
-  GtkWidget *label;
   gchar *text = NULL;
 
   if (priv->entry)
@@ -706,14 +705,6 @@ gdict_applet_cmd_print (BonoboUIComponent *component,
 			const gchar       *cname)
 {
   print_cb (NULL, applet);
-}
-
-static void
-gdict_applet_cmd_save (BonoboUIComponent *component,
-		       GdictApplet       *applet,
-		       const gchar       *cname)
-{
-  save_cb (NULL, applet);
 }
 
 static void
@@ -977,18 +968,6 @@ gdict_applet_set_defbox_font (GdictApplet *applet,
 }
 
 static void
-gdict_applet_set_word (GdictApplet *applet,
-		       const gchar *word)
-{
-  GdictAppletPrivate *priv = applet->priv;
-  
-  if (priv->word)
-    g_free (priv->word);
-  
-  priv->word = g_strdup (word);
-}
-
-static void
 gdict_applet_set_context (GdictApplet  *applet,
 			  GdictContext *context)
 {
@@ -1055,7 +1034,6 @@ gdict_applet_gconf_notify_cb (GConfClient *client,
 			      gpointer     user_data)
 {
   GdictApplet *applet = GDICT_APPLET (user_data);
-  GdictAppletPrivate *priv = applet->priv;
 
   if (strcmp (entry->key, GDICT_GCONF_PRINT_FONT_KEY) == 0)
     {

@@ -37,6 +37,7 @@
 #include <gconf/gconf-client.h>
 
 #include "gdict-source-dialog.h"
+#include "gdict-common.h"
 
 #define GDICT_SOURCE_UI 	PKGDATADIR "/gnome-dictionary-source.ui"
 
@@ -168,22 +169,6 @@ set_text_to_entry (GdictSourceDialog *dialog,
     return;
 
   gtk_entry_set_text (GTK_ENTRY (entry), text);
-}
-
-static gchar *
-get_text_from_combo (GdictSourceDialog *dialog,
-		     const gchar       *combo_name)
-{
-  GtkWidget *combo;
-  gchar *retval;
-  
-  combo = GTK_WIDGET (gtk_builder_get_object (dialog->builder, combo_name));
-  if (!combo)
-    return NULL;
-  
-  retval = gtk_combo_box_get_active_text (GTK_COMBO_BOX (combo));
-  
-  return retval;
 }
 
 static void

@@ -325,7 +325,6 @@ source_remove_clicked_cb (GtkWidget       *widget,
   GtkTreeModel *model;
   GtkTreeIter iter;
   gboolean is_selected;
-  GdictSource *source;
   gchar *name, *description;
   
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (dialog->sources_view));
