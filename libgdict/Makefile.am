@@ -53,12 +53,24 @@ sources_c =	\
 lib_LTLIBRARIES = libgdict-1.0.la
 
 # GNOME Dictionary shared library
-libgdict_1_0_la_SOURCES  = $(sources_h) $(sources_h_priv) $(sources_c)
-libgdict_1_0_la_CPPFLAGS = $(LIBGDICT_CFLAGS) $(GDICT_DEBUG_CFLAGS) $(MAINTAINER_CFLAGS)
-libgdict_1_0_la_LIBADD   = $(LIBGDICT_LIBS)
+libgdict_1_0_la_SOURCES = \
+	$(sources_h)		\
+	$(sources_h_priv)	\
+	$(sources_c)
+
+libgdict_1_0_la_CPPFLAGS = \
+	$(GLIB_CFLAGS)		\
+	$(GTK2_CFLAGS)		\
+	$(GDICT_DEBUG_CFLAGS)	\
+	$(MAINTAINER_CFLAGS)
+
+libgdict_1_0_la_LIBADD = \
+	$(GLIB_LIBS)		\
+	$(GTK2_LIBS)
+
 libgdict_1_0_la_LDFLAGS  = \
-	-version-info $(LIBGDICT_LT_VERSION) \
-	-export-dynamic \
+	-version-info $(LIBGDICT_LT_VERSION)	\
+	-export-dynamic				\
 	-no-undefined
 
 libgdict_includedir = $(includedir)/gdict-1.0/gdict

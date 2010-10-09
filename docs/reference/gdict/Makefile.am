@@ -53,13 +53,15 @@ extra_files =
 GTKDOC_CFLAGS =					\
 	$(CFLAGS)				\
 	$(CPPFLAGS)				\
-	$(LIBGDICT_CFLAGS)			\
-	-I$(srcdir)/../../../libgdict    	\
+	$(GLIB_CFLAGS)				\
+	$(GTK2_CFLAGS)				\
+	-I$(srcdir)/../../../libgdict		\
 	-I$(top_builddir)/gnome-dictionary/libgdict
 
 GTKDOC_LIBS =						\
 	$(LDFLAGS)					\
-	$(LIBGDICT_LIBS)				\
+	$(GLIB_LIBS)					\
+	$(GTK2_LIBS)					\
 	../../../libgdict/libgdict-1.0.la
 
 include $(top_srcdir)/gtk-doc.make
