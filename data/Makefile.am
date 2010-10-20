@@ -28,11 +28,11 @@ builder_DATA      = gnome-dictionary-preferences.ui \
 uidir           = $(datadir)/gnome-dictionary
 ui_DATA         = gnome-dictionary-ui.xml
 
-if BUILD_GDICT_APPLET
-
 # applet menu definition
 appletuidir	= $(datadir)/gnome-2.0/ui
 appletui_DATA	= GNOME_DictionaryApplet.xml
+
+if BUILD_GDICT_APPLET
 
 serverdir       = $(libdir)/bonobo/servers
 server_in_files = GNOME_DictionaryApplet.server.in
