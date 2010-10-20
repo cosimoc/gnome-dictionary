@@ -54,14 +54,14 @@ GTKDOC_CFLAGS =					\
 	$(CFLAGS)				\
 	$(CPPFLAGS)				\
 	$(GLIB_CFLAGS)				\
-	$(GTK2_CFLAGS)				\
+	$(GTK_CFLAGS)				\
 	-I$(srcdir)/../../../libgdict		\
 	-I$(top_builddir)/gnome-dictionary/libgdict
 
 GTKDOC_LIBS =						\
 	$(LDFLAGS)					\
 	$(GLIB_LIBS)					\
-	$(GTK2_LIBS)					\
+	$(GTK_LIBS)					\
 	../../../libgdict/libgdict-1.0.la
 
 include $(top_srcdir)/gtk-doc.make

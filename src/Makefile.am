@@ -90,7 +90,7 @@ gnome_dictionary_applet_LDADD = \
 	$(top_builddir)/gnome-dictionary/libgdict/libgdict-1.0.la \
 	$(GLIB_LIBS)		\
 	$(GIO_LIBS)		\
-	$(GTK2_LIBS)		\
+	$(GTK_LIBS)		\
 	$(GCONF_LIBS)		\
 	$(APPLET_LIBS)		\
 	$(NULL)
