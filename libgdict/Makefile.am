@@ -60,13 +60,13 @@ libgdict_1_0_la_SOURCES = \
 
 libgdict_1_0_la_CPPFLAGS = \
 	$(GLIB_CFLAGS)		\
-	$(GTK2_CFLAGS)		\
+	$(GTK_CFLAGS)		\
 	$(GDICT_DEBUG_CFLAGS)	\
 	$(MAINTAINER_CFLAGS)
 
 libgdict_1_0_la_LIBADD = \
 	$(GLIB_LIBS)		\
-	$(GTK2_LIBS)
+	$(GTK_LIBS)
 
 libgdict_1_0_la_LDFLAGS  = \
 	-version-info $(LIBGDICT_LT_VERSION)	\

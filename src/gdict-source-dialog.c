@@ -718,8 +718,6 @@ gdict_source_dialog_init (GdictSourceDialog *dialog)
 {
   gtk_widget_set_size_request (GTK_WIDGET (dialog), 400, 300);
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-  
-  gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
 
   dialog->transport = GDICT_SOURCE_TRANSPORT_INVALID;
 

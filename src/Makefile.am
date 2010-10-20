@@ -41,7 +41,7 @@ gnome_dictionary_CFLAGS = \
 	-I$(top_srcdir)/gnome-dictionary	\
 	$(GLIB_CFLAGS)				\
 	$(GIO_CFLAGS)				\
-	$(GTK2_CFLAGS)				\
+	$(GTK_CFLAGS)				\
 	$(GCONF_CFLAGS)				\
 	$(NULL)
 
@@ -50,7 +50,7 @@ gnome_dictionary_LDADD = \
 	$(top_builddir)/gnome-dictionary/libgdict/libgdict-1.0.la \
 	$(GLIB_LIBS)		\
 	$(GIO_LIBS)		\
-	$(GTK2_LIBS)		\
+	$(GTK_LIBS)		\
 	$(GCONF_LIBS)		\
 	$(NULL)
 
@@ -80,7 +80,7 @@ gnome_dictionary_applet_CFLAGS = \
 	-I$(top_srcdir)/gnome-dictionary	\
 	$(GLIB_CFLAGS)				\
 	$(GIO_CFLAG)				\
-	$(GTK2_CFLAGS)				\
+	$(GTK_CFLAGS)				\
 	$(GCONF_CFLAG)				\
 	$(APPLET_CFLAGS) \
 	$(NULL)

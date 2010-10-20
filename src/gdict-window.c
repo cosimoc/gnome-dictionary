@@ -1879,7 +1879,6 @@ gdict_window_constructor (GType                  type,
   gtk_widget_show (window->defbox_frame);
 
   window->status = gtk_statusbar_new ();
-  gtk_statusbar_set_has_resize_grip (GTK_STATUSBAR (window->status), TRUE);
   gtk_box_pack_end (GTK_BOX (window->main_box), window->status, FALSE, FALSE, 0);
   statusbar_visible = gconf_client_get_bool (window->gconf_client,
 		  			     GDICT_GCONF_STATUSBAR_VISIBLE_KEY,
