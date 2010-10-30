@@ -1782,7 +1782,7 @@ gdict_window_constructor (GType                  type,
   gtk_box_pack_start (GTK_BOX (hbox), window->entry, TRUE, TRUE, 0);
   gtk_widget_show (window->entry);
 
-  handle = gtk_hpaned_new ();
+  handle = gtk_paned_new (GTK_ORIENTATION_HORIZONTAL);
   gtk_box_pack_start (GTK_BOX (vbox), handle, TRUE, TRUE, 0);
   gtk_widget_show (handle);
 
