@@ -1,3 +1,4 @@
+#'gnome-utils/gnome-dictionary/help
 # Slovenian translation for gnome-utils help.
 # Copyright (C) 2010 gnome-utils's COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-utils package.
@@ -8,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils help master\n"
 "POT-Creation-Date: 2010-10-20 23:00+0000\n"
-"PO-Revision-Date: 2010-10-21 08:54+0100\n"
+"PO-Revision-Date: 2010-11-07 12:49+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -131,7 +132,7 @@ msgstr ""
 
 #: C/gnome-dictionary.xml:80(date)
 msgid "January 2005"
-msgstr ""
+msgstr "Januar 2005"
 
 #: C/gnome-dictionary.xml:88(releaseinfo)
 msgid "This manual describes version 2.14.0 of Dictionary."
@@ -256,7 +257,7 @@ msgstr ""
 
 #: C/gnome-dictionary.xml:214(title)
 msgid "Find Text"
-msgstr ""
+msgstr "Iskanje besedila"
 
 #: C/gnome-dictionary.xml:223(phrase)
 msgid "Shows the Dictionary Find pane inside the main window."
@@ -281,7 +282,7 @@ msgstr ""
 #: C/gnome-dictionary.xml:248(title)
 #: C/gnome-dictionary.xml:438(title)
 msgid "Preferences"
-msgstr ""
+msgstr "Možnosti"
 
 #: C/gnome-dictionary.xml:250(para)
 msgid "To change the <application>Dictionary</application> application preferences, choose <menuchoice><guimenu>Edit</guimenu><guimenuitem>Preferences</guimenuitem></menuchoice>."
@@ -289,7 +290,7 @@ msgstr ""
 
 #: C/gnome-dictionary.xml:255(title)
 msgid "Dictionary Sources"
-msgstr ""
+msgstr "Viri slovarja"
 
 #: C/gnome-dictionary.xml:264(phrase)
 msgid "Shows the Source tab of the Preferences dialog."
@@ -341,11 +342,11 @@ msgstr ""
 
 #: C/gnome-dictionary.xml:307(para)
 msgid "Attributes"
-msgstr ""
+msgstr "Atributi"
 
 #: C/gnome-dictionary.xml:312(para)
 msgid "Dictionary Server"
-msgstr ""
+msgstr "Strežnik slovarja"
 
 #: C/gnome-dictionary.xml:314(para)
 msgid "Hostname: the hostname of the dictionary server"
@@ -401,7 +402,7 @@ msgstr ""
 
 #: C/gnome-dictionary.xml:373(title)
 msgid "The Dictionary Applet"
-msgstr ""
+msgstr "Aplet slovarja"
 
 #: C/gnome-dictionary.xml:375(para)
 msgid "The <application>Dictionary</application> application comes with a panel applet, the <application>Dictionary Applet</application>. You can add the <application>Dictionary Applet</application> applet to a panel and look up words in dictionaries."
