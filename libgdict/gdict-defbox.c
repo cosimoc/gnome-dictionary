@@ -2853,7 +2853,11 @@ gdict_defbox_set_font_name (GdictDefbox *defbox,
   else
     font_desc = NULL;
 
+#if GTK_CHECK_VERSION (2, 91, 6)
+  gtk_widget_override_font (priv->text_view, font_desc);
+#else
   gtk_widget_modify_font (priv->text_view, font_desc);
+#endif
 
   if (font_desc)
     pango_font_description_free (font_desc);
