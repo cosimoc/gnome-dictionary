@@ -172,8 +172,7 @@ gdict_speller_finalize (GObject *gobject)
   if (priv->context)
     set_gdict_context (speller, NULL);
 
-  if (priv->busy_cursor)
-    gdk_cursor_unref (priv->busy_cursor);
+  g_clear_object (&priv->busy_cursor);
 
   g_free (priv->strategy);
   g_free (priv->database);

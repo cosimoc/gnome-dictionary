@@ -127,11 +127,7 @@ gdict_source_chooser_dispose (GObject *gobject)
       priv->loader = NULL;
     }
 
-  if (priv->busy_cursor)
-    {
-      gdk_cursor_unref (priv->busy_cursor);
-      priv->busy_cursor = NULL;
-    }
+  g_clear_object (&priv->busy_cursor);
 
   G_OBJECT_CLASS (gdict_source_chooser_parent_class)->dispose (gobject);
 }

@@ -174,11 +174,7 @@ gdict_strategy_chooser_dispose (GObject *gobject)
 
   set_gdict_context (chooser, NULL);
 
-  if (priv->busy_cursor)
-    {
-      gdk_cursor_unref (priv->busy_cursor);
-      priv->busy_cursor = NULL;
-    }
+  g_clear_object (&priv->busy_cursor);
 
   if (priv->store)
     {

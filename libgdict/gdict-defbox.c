@@ -189,23 +189,9 @@ gdict_defbox_dispose (GObject *gobject)
       priv->buffer = NULL;
     }
 
-  if (priv->busy_cursor)
-    {
-      gdk_cursor_unref (priv->busy_cursor);
-      priv->busy_cursor = NULL;
-    }
-
-  if (priv->hand_cursor)
-    {
-      gdk_cursor_unref (priv->hand_cursor);
-      priv->hand_cursor = NULL;
-    }
-
-  if (priv->regular_cursor)
-    {
-      gdk_cursor_unref (priv->regular_cursor);
-      priv->regular_cursor = NULL;
-    }
+  g_clear_object (&priv->busy_cursor);
+  g_clear_object (&priv->hand_cursor);
+  g_clear_object (&priv->regular_cursor);
 
   G_OBJECT_CLASS (gdict_defbox_parent_class)->dispose (gobject);
 }
