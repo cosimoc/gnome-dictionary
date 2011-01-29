@@ -187,15 +187,3 @@ gdict_show_gerror_dialog (GtkWindow   *parent,
   g_error_free (error);
   error = NULL;
 }
-
-gchar *
-gdict_gconf_get_string_with_default (GConfClient *client,
-				     const gchar *key,
-				     const gchar *def)
-{
-  gchar *val;
-
-  val = gconf_client_get_string (client, key, NULL);
-  return val ? val : g_strdup (def);
-}
-

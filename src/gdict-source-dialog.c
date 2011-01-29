@@ -34,7 +34,8 @@
 #endif
 
 #include <glib/gi18n.h>
-#include <gconf/gconf-client.h>
+
+#include <gio/gio.h>
 
 #include "gdict-source-dialog.h"
 #include "gdict-common.h"
@@ -51,9 +52,8 @@ struct _GdictSourceDialog
 
   GtkBuilder *builder; 
 
-  GConfClient *gconf_client;
-  guint notify_id;
-  
+  GSettings *settings;
+
   GdictSourceLoader *loader;
   GdictSource *source;
   gchar *source_name;
@@ -499,8 +499,8 @@ gdict_source_dialog_finalize (GObject *object)
 {
   GdictSourceDialog *dialog = GDICT_SOURCE_DIALOG (object);
 
-  if (dialog->gconf_client)
-    g_object_unref (dialog->gconf_client);
+  if (dialog->settings)
+    g_object_unref (dialog->settings);
   
   if (dialog->builder)
     g_object_unref (dialog->builder);

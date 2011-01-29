@@ -320,7 +320,7 @@ gdict_look_up_word_and_quit (GdictApp *app)
 void
 gdict_init (int *argc, char ***argv)
 {
-  GError *gconf_error, *err = NULL;
+  GError *err = NULL;
   GOptionContext *context;
   gchar *loader_path;
   gchar **lookup_words = NULL;
@@ -391,20 +391,8 @@ gdict_init (int *argc, char ***argv)
 
       exit (1);
     }
-  
-  gconf_error = NULL;
-  singleton->gconf_client = gconf_client_get_default ();
-  gconf_client_add_dir (singleton->gconf_client,
-  			GDICT_GCONF_DIR,
-  			GCONF_CLIENT_PRELOAD_ONELEVEL,
-  			&gconf_error);
-  if (gconf_error)
-    {
-      g_warning ("Unable to access GConf: %s\n", gconf_error->message);
-      
-      g_error_free (gconf_error);
-      g_object_unref (singleton->gconf_client);
-    }
+
+  singleton->settings = g_settings_new ("org.gnome.dictionary");
 
   /* add user's path for fetching dictionary sources */  
   singleton->loader = gdict_source_loader_new ();

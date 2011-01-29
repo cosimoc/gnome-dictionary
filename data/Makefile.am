@@ -1,13 +1,18 @@
 NULL =
 
+EXTRA_DIST =
+CLEANFILES =
+
 man_MANS = gnome-dictionary.1
+EXTRA_DIST += $(man_MANS)
 
 gdictappdir = $(datadir)/applications
 gdictapp_in_files = gnome-dictionary.desktop.in
 gdictapp_DATA = $(gdictapp_in_files:.desktop.in=.desktop)
+EXTRA_DIST += gnome-dictionary.desktop.in.in
 
 $(gdictapp_in_files): $(gdictapp_in_files:.desktop.in=.desktop.in.in)
-	@sed -e "s|\@VERSION\@|@VERSION@|" $< > $@
+	$(AM_V_GEN)sed -e "s|\@VERSION\@|@VERSION@|" $< > $@
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -21,64 +26,38 @@ dictsource_in_files = \
 dictsource_DATA = $(dictsource_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-builderdir        = $(datadir)/gnome-dictionary
-builder_DATA      = gnome-dictionary-preferences.ui \
-		    gnome-dictionary-source.ui
+EXTRA_DIST += $(dictsource_in_files)
 
-uidir           = $(datadir)/gnome-dictionary
-ui_DATA         = gnome-dictionary-ui.xml
+builderdir = $(datadir)/gnome-dictionary
+builder_DATA = \
+	gnome-dictionary-preferences.ui	\
+	gnome-dictionary-source.ui	\
+	$(NULL)
+
+uidir = $(datadir)/gnome-dictionary
+ui_DATA = gnome-dictionary-ui.xml
 
 # applet menu definition
-appletuidir	= $(datadir)/gnome-2.0/ui
-appletui_DATA	= GNOME_DictionaryApplet.xml
+appletuidir = $(datadir)/gnome-2.0/ui
+appletui_DATA = GNOME_DictionaryApplet.xml
 
 if BUILD_GDICT_APPLET
-
 serverdir       = $(libdir)/bonobo/servers
 server_in_files = GNOME_DictionaryApplet.server.in
 server_DATA     = $(server_in_files:.server.in=.server)
 
 $(server_in_files): $(server_in_files:.server.in=.server.in.in)
-	@sed 						\
+	$(AM_V_GEN)sed 					\
 		-e "s|\@VERSION\@|@VERSION@|" 		\
 		-e "s|\@LIBEXECDIR\@|$(libexecdir)|" 	\
 	$< > $@
 
-
 @INTLTOOL_SERVER_RULE@
-
 endif # BUILD_GDICT_APPLET
 
-schemadir   = $(GCONF_SCHEMA_FILE_DIR)
-schemas_in_file = gnome-dictionary.schemas.in
-schema_DATA = $(schemas_in_file:.schemas.in=.schemas)
-@INTLTOOL_SCHEMAS_RULE@
+EXTRA_DIST += GNOME_DictionaryApplet.server.in.in
 
-EXTRA_DIST = \
-	GNOME_DictionaryApplet.server.in.in 	\
-	gnome-dictionary.desktop.in.in		\
-	$(dictsource_in_files)			\
-	$(man_MANS) 				\
-	$(schemas_in_file) 			\
-	$(builder_DATA) 				\
-	$(ui_DATA)				\
-	$(appletui_DATA)			\
-	$(NULL)
-
-CLEANFILES = 				\
-	$(dictsource_DATA)		\
-	$(server_in_files) 		\
-	$(server_DATA) 			\
-	$(gdictapp_in_files)		\
-	$(gdictapp_DATA) 		\
-	$(schema_DATA)			\
-	$(NULL)
-
-if GCONF_SCHEMAS_INSTALL
-install-data-local:
-	if test -z "$(DESTDIR)" ; then \
-		GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schema_DATA) ; \
-	fi
-else
-install-data-local:
-endif
+gsettings_SCHEMAS = org.gnome.dictionary.gschema.xml
+CLEANFILES += $(gsettings_SCHEMAS)
+@INTLTOOL_XML_NOMERGE_RULE@
+@GSETTINGS_RULES@

@@ -34,7 +34,8 @@
 #endif
 
 #include <glib/gi18n.h>
-#include <gconf/gconf-client.h>
+
+#include <gio/gio.h>
 
 #include "gdict-source-dialog.h"
 #include "gdict-pref-dialog.h"
@@ -66,8 +67,7 @@ struct _GdictPrefDialog
 
   GtkBuilder *builder;
 
-  GConfClient *gconf_client;
-  guint notify_id;
+  GSettings *settings;
   
   gchar *active_source;
   GdictSourceLoader *loader;
@@ -204,14 +204,10 @@ source_renderer_toggled_cb (GtkCellRendererToggle *renderer,
     {
       g_free (dialog->active_source);
       dialog->active_source = g_strdup (name);
-      
-      gconf_client_set_string (dialog->gconf_client,
-      			       GDICT_GCONF_SOURCE_KEY,
-      			       dialog->active_source,
-      			       NULL);
-      
+
+      g_settings_set_string (dialog->settings, GDICT_SETTINGS_SOURCE_KEY, dialog->active_source);
       update_sources_view (dialog);
-      
+
       g_free (name);
     }
   
@@ -434,52 +430,8 @@ font_button_font_set_cb (GtkWidget       *font_button,
   
   g_free (dialog->print_font);
   dialog->print_font = g_strdup (font);
-      
-  gconf_client_set_string (dialog->gconf_client,
-  			   GDICT_GCONF_PRINT_FONT_KEY,
-  			   dialog->print_font,
-  			   NULL);
-}
 
-static void
-gdict_pref_dialog_gconf_notify_cb (GConfClient *client,
-				   guint        cnxn_id,
-				   GConfEntry  *entry,
-				   gpointer     user_data)
-{
-  GdictPrefDialog *dialog = GDICT_PREF_DIALOG (user_data);
-  
-  if (strcmp (entry->key, GDICT_GCONF_SOURCE_KEY) == 0)
-    {
-      if (entry->value && entry->value->type == GCONF_VALUE_STRING)
-        {
-          g_free (dialog->active_source);
-          dialog->active_source = g_strdup (gconf_value_get_string (entry->value));
-        }
-      else
-        {
-          g_free (dialog->active_source);
-          dialog->active_source = g_strdup (GDICT_DEFAULT_SOURCE_NAME);
-        }
-      
-      update_sources_view (dialog);
-    }
-  else if (strcmp (entry->key, GDICT_GCONF_PRINT_FONT_KEY) == 0)
-    {
-      if (entry->value && entry->value->type == GCONF_VALUE_STRING)
-        {
-          g_free (dialog->print_font);
-          dialog->print_font = g_strdup (gconf_value_get_string (entry->value));
-        }
-      else
-        {
-          g_free (dialog->print_font);
-          dialog->print_font = g_strdup (GDICT_DEFAULT_PRINT_FONT);
-        }
-
-      gtk_font_button_set_font_name (GTK_FONT_BUTTON (dialog->font_button),
-		      		     dialog->print_font);
-    }
+  g_settings_set_string (dialog->settings, GDICT_SETTINGS_PRINT_FONT_KEY, dialog->print_font);
 }
 
 static void
@@ -531,11 +483,8 @@ gdict_pref_dialog_finalize (GObject *object)
 {
   GdictPrefDialog *dialog = GDICT_PREF_DIALOG (object);
   
-  if (dialog->notify_id);
-    gconf_client_notify_remove (dialog->gconf_client, dialog->notify_id);
-  
-  if (dialog->gconf_client)
-    g_object_unref (dialog->gconf_client);
+  if (dialog->settings)
+    g_object_unref (dialog->settings);
   
   if (dialog->builder)
     g_object_unref (dialog->builder);
@@ -624,17 +573,7 @@ gdict_pref_dialog_init (GdictPrefDialog *dialog)
   			 "gtk-close",
   			 GTK_RESPONSE_ACCEPT);
 
-  dialog->gconf_client = gconf_client_get_default ();
-  gconf_client_add_dir (dialog->gconf_client,
-  			GDICT_GCONF_DIR,
-  			GCONF_CLIENT_PRELOAD_ONELEVEL,
-  			NULL);
-  dialog->notify_id = gconf_client_notify_add (dialog->gconf_client,
-  					       GDICT_GCONF_DIR,
-		  			       gdict_pref_dialog_gconf_notify_cb,
-  					       dialog,
-  					       NULL,
-  					       NULL);
+  dialog->settings = g_settings_new (GDICT_SETTINGS_SCHEMA);
 
   /* get the UI from the GtkBuilder file */
   dialog->builder = gtk_builder_new ();
@@ -656,9 +595,7 @@ gdict_pref_dialog_init (GdictPrefDialog *dialog)
   dialog->sources_view = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "sources_treeview"));
   build_sources_view (dialog);
 
-  dialog->active_source = gdict_gconf_get_string_with_default (dialog->gconf_client,
-							       GDICT_GCONF_SOURCE_KEY,
-							       GDICT_DEFAULT_SOURCE_NAME);
+  dialog->active_source = g_settings_get_string (dialog->settings, GDICT_SETTINGS_SOURCE_KEY);
 
   dialog->sources_add = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "add_button"));
   gtk_widget_set_tooltip_text (dialog->sources_add,
@@ -671,13 +608,8 @@ gdict_pref_dialog_init (GdictPrefDialog *dialog)
                                _("Remove the currently selected dictionary source"));
   g_signal_connect (dialog->sources_remove, "clicked",
   		    G_CALLBACK (source_remove_clicked_cb), dialog);
-  
-  font = gconf_client_get_string (dialog->gconf_client,
-  				  GDICT_GCONF_PRINT_FONT_KEY,
-  				  NULL);
-  if (!font)
-    font = g_strdup (GDICT_DEFAULT_PRINT_FONT);
-  
+
+  font = g_settings_get_string (dialog->settings, GDICT_SETTINGS_PRINT_FONT_KEY);
   dialog->font_button = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "print_font_button"));
   gtk_font_button_set_font_name (GTK_FONT_BUTTON (dialog->font_button), font);
   gtk_widget_set_tooltip_text (dialog->font_button,

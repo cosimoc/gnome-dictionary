@@ -42,7 +42,6 @@ gnome_dictionary_CFLAGS = \
 	$(GLIB_CFLAGS)				\
 	$(GIO_CFLAGS)				\
 	$(GTK_CFLAGS)				\
-	$(GCONF_CFLAGS)				\
 	$(NULL)
 
 gnome_dictionary_LDADD = \
@@ -51,11 +50,9 @@ gnome_dictionary_LDADD = \
 	$(GLIB_LIBS)		\
 	$(GIO_LIBS)		\
 	$(GTK_LIBS)		\
-	$(GCONF_LIBS)		\
 	$(NULL)
 
 if BUILD_GDICT_APPLET
-
 gnome_dictionary_applet_SOURCES = \
 	gdict-about.c 		\
 	gdict-about.h		\
@@ -81,8 +78,8 @@ gnome_dictionary_applet_CFLAGS = \
 	$(GLIB_CFLAGS)				\
 	$(GIO_CFLAG)				\
 	$(GTK_CFLAGS)				\
-	$(GCONF_CFLAG)				\
-	$(APPLET_CFLAGS) \
+	$(APPLET_CFLAGS) 			\
+	$(GCONF_CFLAGS)				\
 	$(NULL)
 
 gnome_dictionary_applet_LDADD = \
@@ -91,8 +88,7 @@ gnome_dictionary_applet_LDADD = \
 	$(GLIB_LIBS)		\
 	$(GIO_LIBS)		\
 	$(GTK_LIBS)		\
-	$(GCONF_LIBS)		\
 	$(APPLET_LIBS)		\
+	$(GCONF_LIBS)		\
 	$(NULL)
-
 endif # BUILD_GDICT_APPLET
