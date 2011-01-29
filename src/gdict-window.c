@@ -230,21 +230,22 @@ gdict_window_set_sidebar_visible (GdictWindow *window,
 				  gboolean     is_visible)
 {
   g_assert (GDICT_IS_WINDOW (window));
-  
+
+  is_visible = !!is_visible;
+
   if (is_visible != window->sidebar_visible)
     {
       GtkAction *action;
 
-      if (is_visible)
+      window->sidebar_visible = is_visible;
+
+      if (window->sidebar_visible)
 	gtk_widget_show (window->sidebar_frame);
       else
 	gtk_widget_hide (window->sidebar_frame);
 
-      action = gtk_action_group_get_action (window->action_group,
-                                            "ViewSidebar");
-      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), is_visible);
-
-      window->sidebar_visible = is_visible;
+      action = gtk_action_group_get_action (window->action_group, "ViewSidebar");
+      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), window->sidebar_visible);
     }
 }
 
@@ -254,20 +255,21 @@ gdict_window_set_statusbar_visible (GdictWindow *window,
 {
   g_assert (GDICT_IS_WINDOW (window));
 
+  is_visible = !!is_visible;
+
   if (is_visible != window->statusbar_visible)
     {
       GtkAction *action;
 
-      if (is_visible)
+      window->statusbar_visible = is_visible;
+
+      if (window->statusbar_visible)
 	gtk_widget_show (window->status);
       else
 	gtk_widget_hide (window->status);
 
-      action = gtk_action_group_get_action (window->action_group,
-                                            "ViewStatusbar");
-      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), is_visible);
-
-      window->statusbar_visible = is_visible;
+      action = gtk_action_group_get_action (window->action_group, "ViewStatusbar");
+      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), window->statusbar_visible);
     }
 }
 
@@ -1093,27 +1095,32 @@ gdict_window_cmd_edit_preferences (GtkAction   *action,
 }
 
 static void
-gdict_window_cmd_view_sidebar (GtkAction   *action,
-			       GdictWindow *window)
+gdict_window_cmd_view_sidebar (GtkToggleAction *action,
+			       GdictWindow     *window)
 {
   g_assert (GDICT_IS_WINDOW (window));
 
+  window->sidebar_visible = gtk_toggle_action_get_active (action);
+
   if (window->sidebar_visible)
-    gdict_window_set_sidebar_visible (window, FALSE);
+    gtk_widget_show (window->sidebar_frame);
   else
-    gdict_window_set_sidebar_visible (window, TRUE);
+    gtk_widget_hide (window->sidebar_frame);
 }
 
 static void
-gdict_window_cmd_view_statusbar (GtkAction   *action,
-				 GdictWindow *window)
+gdict_window_cmd_view_statusbar (GtkToggleAction *action,
+				 GdictWindow     *window)
 {
   g_assert (GDICT_IS_WINDOW (window));
 
+  window->statusbar_visible = gtk_toggle_action_get_active (action);
+
   if (window->statusbar_visible)
-    gdict_window_set_statusbar_visible (window, FALSE);
+    gtk_widget_show (window->status);
   else
-    gdict_window_set_statusbar_visible (window, TRUE);
+    gtk_widget_hide (window->status);
+
 }
 
 static void
@@ -1823,6 +1830,7 @@ gdict_window_constructor (GType                  type,
   g_signal_connect (window->sidebar, "closed",
 		    G_CALLBACK (sidebar_closed_cb),
 		    window);
+  gtk_widget_show (window->sidebar);
   
   /* Speller */
   window->speller = gdict_speller_new ();
@@ -1891,7 +1899,6 @@ gdict_window_constructor (GType                  type,
                    G_SETTINGS_BIND_DEFAULT);
 
   gtk_container_add (GTK_CONTAINER (frame2), window->sidebar);
-  gtk_widget_show (window->sidebar);
 
   gtk_paned_pack1 (GTK_PANED (handle), frame1, TRUE, FALSE);
   gtk_paned_pack2 (GTK_PANED (handle), frame2, FALSE, TRUE);
@@ -1901,9 +1908,25 @@ gdict_window_constructor (GType                  type,
 
   gtk_widget_show (window->defbox_frame);
 
+  if (window->sidebar_visible)
+    {
+      GtkAction *action;
+
+      action = gtk_action_group_get_action (window->action_group, "ViewSidebar");
+      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
+      gtk_widget_show (window->sidebar_frame);
+    }
+
   window->status = gtk_statusbar_new ();
   gtk_box_pack_end (GTK_BOX (window->main_box), window->status, FALSE, FALSE, 0);
-  gdict_window_set_statusbar_visible (window, window->statusbar_visible);
+  if (window->statusbar_visible)
+    {
+      GtkAction *action;
+
+      action = gtk_action_group_get_action (window->action_group, "ViewStatusbar");
+      gtk_toggle_action_set_active (GTK_TOGGLE_ACTION (action), TRUE);
+      gtk_widget_show (window->status);
+    }
 
   window->progress = gtk_progress_bar_new ();
   gtk_box_pack_end (GTK_BOX (window->status), window->progress, FALSE, FALSE, 0);
@@ -1917,8 +1940,6 @@ gdict_window_constructor (GType                  type,
   g_settings_bind (window->desktop_settings, DOCUMENT_FONT_KEY,
                    window, "defbox-font",
                    G_SETTINGS_BIND_GET);
-
-  gdict_window_set_sidebar_visible (window, window->sidebar_visible);
 
   /* if the (width, height) tuple is not defined, use the font to
    * calculate the right window geometry
