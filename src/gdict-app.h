@@ -23,7 +23,6 @@
 #ifndef __GDICT_APP_H__
 #define __GDICT_APP_H__
 
-#include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <libgdict/gdict.h>
 
@@ -43,28 +42,15 @@ struct _GdictApp
 {
   GObject parent_instance;
 
-  GSettings *settings;
+  GtkApplication *app;
 
-  GSList *lookup_words;
-  GSList *match_words;
-  gint remaining_words;
-  
-  gchar *database;
-  gchar *source_name;
-  gboolean no_window;
-  gboolean list_sources;
-  
   GdictSourceLoader *loader;
-
-  GdictWindow *current_window;
-  GSList *windows;  
 };
 
 
 GType      gdict_app_get_type    (void) G_GNUC_CONST;
 
-void       gdict_init            (int *argc, char ***argv);
-void       gdict_main            (void);
+void       gdict_main            (int *argc, char ***argv);
 void       gdict_cleanup         (void);
 
 G_END_DECLS

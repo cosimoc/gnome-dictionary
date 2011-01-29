@@ -925,13 +925,19 @@ gdict_window_cmd_file_new (GtkAction   *action,
     {
       new_window = gdict_window_new (GDICT_WINDOW_ACTION_LOOKUP,
                                      window->loader,
-                                     NULL, word);
+                                     NULL,
+                                     NULL,
+                                     NULL,
+                                     word);
       g_free (word);
     }
   else
     new_window = gdict_window_new (GDICT_WINDOW_ACTION_CLEAR,
                                    window->loader,
-                                   NULL, NULL);
+                                   NULL,
+                                   NULL,
+                                   NULL,
+                                   NULL);
 
   gtk_widget_show (new_window);
   
@@ -1530,7 +1536,10 @@ gdict_window_link_clicked (GdictDefbox *defbox,
 
   new_window = gdict_window_new (GDICT_WINDOW_ACTION_LOOKUP,
                                  window->loader,
-                                 NULL, link_text);
+                                 NULL,
+                                 NULL,
+                                 NULL,
+                                 link_text);
   gtk_widget_show (new_window);
   
   g_signal_emit (window, gdict_window_signals[CREATED], 0, new_window);
@@ -2100,6 +2109,8 @@ GtkWidget *
 gdict_window_new (GdictWindowAction  action,
 		  GdictSourceLoader *loader,
 		  const gchar       *source_name,
+                  const gchar       *database_name,
+                  const gchar       *strategy_name,
 		  const gchar       *word)
 {
   GtkWidget *retval;
@@ -2111,6 +2122,8 @@ gdict_window_new (GdictWindowAction  action,
   			 "action", action,
                          "source-loader", loader,
 			 "source-name", source_name,
+                         "database", database_name,
+                         "strategy", strategy_name,
 			 NULL);
 
   window = GDICT_WINDOW (retval);
@@ -2123,6 +2136,7 @@ gdict_window_new (GdictWindowAction  action,
 	  gtk_entry_set_text (GTK_ENTRY (window->entry), word);
 	  gdict_window_set_word (window, word, NULL);
 	  break;
+
 	case GDICT_WINDOW_ACTION_MATCH:
           {
           GdictSource *source;
@@ -2152,9 +2166,12 @@ gdict_window_new (GdictWindowAction  action,
       
           gdict_speller_match (GDICT_SPELLER (window->speller), word);
           }
+          break;
+
 	case GDICT_WINDOW_ACTION_CLEAR:
           gdict_defbox_clear (GDICT_DEFBOX (window->defbox));
 	  break;
+
 	default:
 	  g_assert_not_reached ();
 	  break;

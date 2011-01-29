@@ -14,10 +14,7 @@ int main (int argc, char *argv[])
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
         textdomain (GETTEXT_PACKAGE);
 
-	gdict_init (&argc, &argv);
-	
-	gdict_main ();
-
+	gdict_main (&argc, &argv);
 	gdict_cleanup ();
 	
 	return EXIT_SUCCESS;

@@ -128,6 +128,8 @@ GType      gdict_window_get_type (void) G_GNUC_CONST;
 GtkWidget *gdict_window_new      (GdictWindowAction  action,
 				  GdictSourceLoader *loader,
 				  const gchar       *source_name,
+                                  const gchar       *database_name,
+                                  const gchar       *strategy_name,
 				  const gchar       *word);
 
 #endif /* __GDICT_WINDOW_H__ */
