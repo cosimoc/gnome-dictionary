@@ -56,22 +56,6 @@ gdict_show_about_dialog (GtkWidget *parent)
   const gchar *copyright = "Copyright \xc2\xa9 2005-2006 Emmanuele Bassi";
   const gchar *comments = _("Look up words in dictionaries");
   
-  const gchar *license =
-    "This program is free software; you can redistribute it and/or "
-    "modify it under the terms of the GNU General Public License as "
-    "published by the Free Software Foundation; either version 2 of "
-    "the License, or (at your option) any later version.\n"
-    "\n"
-    "This program is distributed in the hope that it will be useful, "
-    "but WITHOUT ANY WARRANTY; without even the implied warranty of "
-    "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU "
-    "General Public License for more details.\n"
-    "\n"
-    "You should have received a copy of the GNU General Public License "
-    "along with this program; if not, write to the Free Software "
-    "Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA "
-    "02111-1307, USA.\n";
-
   g_return_if_fail (GTK_IS_WIDGET (parent));
   
   gtk_show_about_dialog (GTK_IS_WINDOW (parent) ? GTK_WINDOW (parent) : NULL,
@@ -83,8 +67,7 @@ gdict_show_about_dialog (GtkWidget *parent)
   			 "documenters", documenters,
   			 "translator-credits", translator_credits,
   			 "logo-icon-name", "accessories-dictionary",
-  			 "license", license,
-  			 "wrap-license", TRUE,
+  			 "license-type", GTK_LICENSE_GPL_2_0,
 			 "screen", gtk_widget_get_screen (parent),
   			 NULL);
 }
