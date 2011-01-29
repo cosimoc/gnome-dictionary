@@ -71,20 +71,11 @@ gdict_create_data_dir (void)
 	      
 	  if (g_rename (data_dir_name, backup) == -1)
 	    {
-              GtkWidget *error_dialog;
+              g_critical ("Unable to rename file '%s' to '%s': %s",
+                          data_dir_name,
+                          backup,
+                          g_strerror (errno));
 
-	      error_dialog = gtk_message_dialog_new (NULL,
-                                                     GTK_DIALOG_MODAL,
-						     GTK_MESSAGE_ERROR,
-						     GTK_BUTTONS_CLOSE,
-						     _("Unable to rename file '%s' to '%s': %s"),
-						     data_dir_name,
-						     backup,
-						     g_strerror (errno));
-	      
-	      gtk_dialog_run (GTK_DIALOG (error_dialog));
-	      
-	      gtk_widget_destroy (error_dialog);
 	      g_free (backup);
 	      g_free (data_dir_name);
 
@@ -95,19 +86,10 @@ gdict_create_data_dir (void)
 	  
           if (g_mkdir (data_dir_name, 0700) == -1)
             {
-              GtkWidget *error_dialog;
-	      
-	      error_dialog = gtk_message_dialog_new (NULL,
-						     GTK_DIALOG_MODAL,
-						     GTK_MESSAGE_ERROR,
-						     GTK_BUTTONS_CLOSE,
-						     _("Unable to create the data directory '%s': %s"),
-						     data_dir_name,
-						     g_strerror (errno));
-	      
-	      gtk_dialog_run (GTK_DIALOG (error_dialog));
-	      
-	      gtk_widget_destroy (error_dialog);
+              g_critical ("Unable to create the data directory '%s': %s",
+                          data_dir_name,
+                          g_strerror (errno));
+
               g_free (data_dir_name);
 
 	      return FALSE;
@@ -118,19 +100,10 @@ gdict_create_data_dir (void)
       
       if (errno != EEXIST)
         {
-          GtkWidget *error_dialog;
+          g_critical ("Unable to create the data directory '%s': %s",
+                      data_dir_name,
+                      g_strerror (errno));
 
-	  error_dialog = gtk_message_dialog_new (NULL,
-						 GTK_DIALOG_MODAL,
-						 GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_CLOSE,
-						 _("Unable to create the data directory '%s': %s"),
-						 data_dir_name,
-						 g_strerror (errno));
-	  
-	  gtk_dialog_run (GTK_DIALOG (error_dialog));
-	  
-	  gtk_widget_destroy (error_dialog);
 	  g_free (data_dir_name);
 
 	  return FALSE;
