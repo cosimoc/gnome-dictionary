@@ -1597,81 +1597,6 @@ gdict_window_size_allocate (GtkWidget     *widget,
 }
 
 static void
-set_window_default_size (GdictWindow *window)
-{
-  GtkWidget *widget;
-  gboolean is_maximized;
-  gint width, height;
-  gint font_size;
-  GdkScreen *screen;
-  gint monitor_num;
-  GtkRequisition req;
-  GdkRectangle monitor;
-
-  g_assert (GDICT_IS_WINDOW (window));
-
-  widget = GTK_WIDGET (window);
-
-  /* make sure that the widget is realized */
-  gtk_widget_realize (widget);
-  
-  /* XXX - the user wants gnome-dictionary to resize itself, so
-   * we compute the minimum safe geometry needed for displaying
-   * the text returned by a dictionary server, which is based
-   * on the font size and the ANSI terminal.  this is dumb,
-   * I know, but dictionary servers return pre-formatted text
-   * and we can't reformat it ourselves.
-   */
-  if (window->default_width == -1 || window->default_height == -1)
-    {
-      /* Size based on the font size */
-      GtkWidget *defbox = window->defbox;
-      gint width, height;
-      
-      font_size = pango_font_description_get_size (gtk_widget_get_style (defbox)->font_desc);
-      font_size = PANGO_PIXELS (font_size);
-
-      width = font_size * GDICT_WINDOW_COLUMNS;
-      height = font_size * GDICT_WINDOW_ROWS;
-
-      /* Use at least the requisition size of the window... */
-      gtk_widget_size_request (widget, &req);
-      width = MAX (width, req.width);
-      height = MAX (height, req.height);
-
-      /* ... but make it no larger than the monitor */
-      screen = gtk_widget_get_screen (widget);
-      monitor_num = gdk_screen_get_monitor_at_window (screen, gtk_widget_get_window (widget));
-
-      gdk_screen_get_monitor_geometry (screen, monitor_num, &monitor);
-      width = MIN (width, monitor.width * 3 / 4);
-      height = MIN (height, monitor.height * 3 / 4);
-
-      window->default_width = width;
-      window->default_height = height;
-    }
-
-  /* Set default size */
-  gtk_window_set_default_size (GTK_WINDOW (widget),
-                               window->default_width,
-                               window->default_height);
-
-  if (window->is_maximized)
-    gtk_window_maximize (GTK_WINDOW (widget));
-}
-
-static void
-gdict_window_style_set (GtkWidget *widget,
-			GtkStyle  *old_style)
-{
-
-  if (GTK_WIDGET_CLASS (gdict_window_parent_class)->style_set)
-    GTK_WIDGET_CLASS (gdict_window_parent_class)->style_set (widget, old_style);
-
-  set_window_default_size (GDICT_WINDOW (widget));
-}
-
-static void
 gdict_window_handle_notify_position_cb (GtkWidget  *widget,
 					GParamSpec *pspec,
 					gpointer    user_data)
@@ -2087,7 +2012,6 @@ gdict_window_class_init (GdictWindowClass *klass)
                                      LAST_PROP,
                                      gdict_window_properties);
 
-  widget_class->style_set = gdict_window_style_set;
   widget_class->size_allocate = gdict_window_size_allocate;
 }
 
