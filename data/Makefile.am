@@ -41,10 +41,18 @@ ui_DATA = gnome-dictionary-ui.xml
 appletuidir = $(datadir)/gnome-2.0/ui
 appletui_DATA = GNOME_DictionaryApplet.xml
 
+EXTRA_DIST += $(appletui_DATA) \
+	$(builder_DATA) \
+	$(ui_DATA) \
+	$(NULL)
+
+serverdir =
+server_DATA =
+
 if BUILD_GDICT_APPLET
-serverdir       = $(libdir)/bonobo/servers
+serverdir       += $(libdir)/bonobo/servers
 server_in_files = GNOME_DictionaryApplet.server.in
-server_DATA     = $(server_in_files:.server.in=.server)
+server_DATA     += $(server_in_files:.server.in=.server)
 
 $(server_in_files): $(server_in_files:.server.in=.server.in.in)
 	$(AM_V_GEN)sed 					\
@@ -58,6 +66,11 @@ endif # BUILD_GDICT_APPLET
 EXTRA_DIST += GNOME_DictionaryApplet.server.in.in
 
 gsettings_SCHEMAS = org.gnome.dictionary.gschema.xml
-CLEANFILES += $(gsettings_SCHEMAS)
+CLEANFILES += $(gsettings_SCHEMAS) \
+	$(dictsource_DATA) \
+	$(gdictapp_in_files) \
+	$(gdictapp_DATA) \
+	$(server_DATA)
+	
 @INTLTOOL_XML_NOMERGE_RULE@
 @GSETTINGS_RULES@
