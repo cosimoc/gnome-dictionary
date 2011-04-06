@@ -8,16 +8,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-utils master\n"
-"POT-Creation-Date: 2010-02-04 00:36+0100\n"
-"PO-Revision-Date: 2009-11-07 23:07+0200\n"
+"POT-Creation-Date: 2011-04-06 21:43+0200\n"
+"PO-Revision-Date: 2011-04-01 22:34+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../C/legal.xml:2(para)
+#: ../C/legal.xml:2(para) ../C/gnome-dictionary.xml:2(para)
 msgid ""
 "Permission is granted to copy, distribute and/or modify this document under "
 "the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
@@ -33,7 +34,7 @@ msgstr ""
 "kopi af GFDL her <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink> eller i "
 "filen COPYING-DOCS som distribueres sammen med denne manual."
 
-#: ../C/legal.xml:12(para)
+#: ../C/legal.xml:12(para) ../C/gnome-dictionary.xml:12(para)
 msgid ""
 "This manual is part of a collection of GNOME manuals distributed under the "
 "GFDL. If you want to distribute this manual separately from the collection, "
@@ -45,7 +46,7 @@ msgstr ""
 "du gøre dette ved at tilføje en kopi af licensen til manualen, som beskrevet "
 "i afsnit 6 af licensen."
 
-#: ../C/legal.xml:19(para)
+#: ../C/legal.xml:19(para) ../C/gnome-dictionary.xml:19(para)
 msgid ""
 "Many of the names used by companies to distinguish their products and "
 "services are claimed as trademarks. Where those names appear in any GNOME "
@@ -59,7 +60,7 @@ msgstr ""
 "dokumentationsprojeket er gjort opmærksom på disse varemærker, så er disse "
 "navne vist med store bogstaver eller stort begyndelsesbogstav."
 
-#: ../C/legal.xml:35(para)
+#: ../C/legal.xml:35(para) ../C/gnome-dictionary.xml:35(para)
 msgid ""
 "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
 "EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT "
@@ -87,7 +88,7 @@ msgstr ""
 "ÆNDRET VERSION AF DOKUMENTET ER AUTORISERET HERUNDER BORTSET FRA DENNE "
 "ANSVARSFRASKRIVELSE OG"
 
-#: ../C/legal.xml:55(para)
+#: ../C/legal.xml:55(para) ../C/gnome-dictionary.xml:55(para)
 msgid ""
 "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING "
 "NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY "
@@ -111,7 +112,7 @@ msgstr ""
 "BRUG AF DETTE DOKUMENT ELLER MODIFICEREDE VERSIONER HERAF, SELV HVIS EN "
 "SÅDAN PART HAR VÆRET INFORMERET OM MULIGHEDEN FOR SÅDANNE SKADER."
 
-#: ../C/legal.xml:28(para)
+#: ../C/legal.xml:28(para) ../C/gnome-dictionary.xml:28(para)
 msgid ""
 "DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS "
 "OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: "
@@ -237,6 +238,10 @@ msgstr "ebassi@gmail.com"
 #: ../C/gnome-dictionary.xml:79(revnumber)
 msgid "Dictionary Manual V1.0.0"
 msgstr "Manual for ordbogsopslag version 1.0.0"
+
+#: ../C/gnome-dictionary.xml:80(date)
+msgid "January 2005"
+msgstr "Januar 2005"
 
 #: ../C/gnome-dictionary.xml:88(releaseinfo)
 msgid "This manual describes version 2.14.0 of Dictionary."
@@ -688,7 +693,7 @@ msgid ""
 "on the dictionary icon, then choose <guimenuitem>Preferences</guimenuitem>."
 msgstr ""
 "For at konfigurere <application>Ordbogsopslag</application>, højreklik på "
-"ordbogsikonet, og vælg <uguimenuiten>Indstillinger</guimenuitem>."
+"ordbogsikonet, og vælg <guimenuitem>Indstillinger</guimenuitem>."
 
 #: ../C/gnome-dictionary.xml:443(para)
 msgid ""
@@ -708,6 +713,3 @@ msgstr ""
 "\n"
 "Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Mere info: http://www.dansk-gruppen.dk"
-
-#~ msgid "January 2005"
-#~ msgstr "Januar 2005"
