@@ -780,6 +780,7 @@ gdict_window_store_state (GdictWindow *window)
   gchar *data;
   gsize data_len;
   GError *error;
+  const gchar *page_id;
 
   state_dir = g_build_filename (g_get_user_cache_dir (),
                                 "gnome-dictionary-3.0",
@@ -807,8 +808,12 @@ gdict_window_store_state (GdictWindow *window)
   g_key_file_set_boolean (state_key, "WindowState", "SidebarVisible", window->sidebar_visible);
   g_key_file_set_boolean (state_key, "WindowState", "StatusbarVisible", window->statusbar_visible);
   g_key_file_set_integer (state_key, "WindowState", "SidebarWidth", window->sidebar_width);
-  g_key_file_set_string (state_key, "WindowState", "SidebarPage",
-                         gdict_sidebar_current_page (GDICT_SIDEBAR (window->sidebar)));
+
+  page_id = gdict_sidebar_current_page (GDICT_SIDEBAR (window->sidebar));
+  if (page_id == NULL)
+    page_id = GDICT_SIDEBAR_SPELLER_PAGE;
+
+  g_key_file_set_string (state_key, "WindowState", "SidebarPage", page_id);
 
   error = NULL;
   data = g_key_file_to_data (state_key, &data_len, &error);
@@ -1897,6 +1902,8 @@ gdict_window_constructor (GType                  type,
   gtk_paned_set_position (GTK_PANED (handle), allocation.width - window->sidebar_width);
   if (window->sidebar_page != NULL)
     gdict_sidebar_view_page (GDICT_SIDEBAR (window->sidebar), window->sidebar_page);
+  else
+    gdict_sidebar_view_page (GDICT_SIDEBAR (window->sidebar), GDICT_SIDEBAR_SPELLER_PAGE);
 
   g_signal_connect (window, "delete-event",
 		    G_CALLBACK (gdict_window_delete_event_cb),
