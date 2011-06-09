@@ -555,7 +555,7 @@ gdict_client_context_set_hostname (GdictClientContext *context,
  *   owned by the #GdictClientContext object and should never be modified or
  *   freed.
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_client_context_get_hostname (GdictClientContext *context)
 {
   gchar *hostname;
@@ -636,7 +636,7 @@ gdict_client_context_set_client (GdictClientContext *context,
  * Return value: the client name. The returned string is owned by the
  *   #GdictClientContext object and should never be modified or freed.
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_client_context_get_client (GdictClientContext *context)
 {
   gchar *client_name;

@@ -543,7 +543,7 @@ gdict_speller_set_database (GdictSpeller *speller,
  *
  * Since: FIXME
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_speller_get_database (GdictSpeller *speller)
 {
   g_return_val_if_fail (GDICT_IS_SPELLER (speller), NULL);
@@ -589,7 +589,7 @@ gdict_speller_set_strategy (GdictSpeller *speller,
  *
  * Since: FIXME
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_speller_get_strategy (GdictSpeller *speller)
 {
   g_return_val_if_fail (GDICT_IS_SPELLER (speller), NULL);

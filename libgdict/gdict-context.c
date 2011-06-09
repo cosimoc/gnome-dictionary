@@ -494,7 +494,7 @@ gdict_database_unref (GdictDatabase *db)
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_database_get_name (GdictDatabase *db)
 {
   g_return_val_if_fail (db != NULL, NULL);
@@ -513,7 +513,7 @@ gdict_database_get_name (GdictDatabase *db)
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_database_get_full_name (GdictDatabase *db)
 {
   g_return_val_if_fail (db != NULL, NULL);
@@ -603,7 +603,7 @@ gdict_strategy_unref (GdictStrategy *strat)
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_strategy_get_name (GdictStrategy *strat)
 {
   g_return_val_if_fail (strat != NULL, NULL);
@@ -621,7 +621,7 @@ gdict_strategy_get_name (GdictStrategy *strat)
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_strategy_get_description (GdictStrategy *strat)
 {
   g_return_val_if_fail (strat != NULL, NULL);
@@ -710,7 +710,7 @@ gdict_match_unref (GdictMatch *match)
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_match_get_word (GdictMatch *match)
 {
   g_return_val_if_fail (match != NULL, NULL);
@@ -728,7 +728,7 @@ gdict_match_get_word (GdictMatch *match)
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_match_get_database (GdictMatch *match)
 {
   g_return_val_if_fail (match != NULL, NULL);
@@ -842,7 +842,7 @@ gdict_definition_get_total (GdictDefinition *def)
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_definition_get_word (GdictDefinition *def)
 {
   g_return_val_if_fail (def != NULL, NULL);
@@ -863,7 +863,7 @@ gdict_definition_get_word (GdictDefinition *def)
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_definition_get_database (GdictDefinition *def)
 {
   g_return_val_if_fail (def != NULL, NULL);
@@ -883,7 +883,7 @@ gdict_definition_get_database (GdictDefinition *def)
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_definition_get_text (GdictDefinition *def)
 {
   g_return_val_if_fail (def != NULL, NULL);

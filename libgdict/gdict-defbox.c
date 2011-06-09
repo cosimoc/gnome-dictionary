@@ -2033,7 +2033,7 @@ gdict_defbox_set_database (GdictDefbox *defbox,
  *
  * Since: 0.1
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_defbox_get_database (GdictDefbox *defbox)
 {
   g_return_val_if_fail (GDICT_IS_DEFBOX (defbox), NULL);
@@ -2053,7 +2053,7 @@ gdict_defbox_get_database (GdictDefbox *defbox)
  *
  * Since: 0.12
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_defbox_get_word (GdictDefbox *defbox)
 {
   g_return_val_if_fail (GDICT_IS_DEFBOX (defbox), NULL);
@@ -2863,7 +2863,7 @@ gdict_defbox_set_font_name (GdictDefbox *defbox,
  *
  * Since: 0.3
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_defbox_get_font_name (GdictDefbox *defbox)
 {
   g_return_val_if_fail (GDICT_IS_DEFBOX (defbox), NULL);

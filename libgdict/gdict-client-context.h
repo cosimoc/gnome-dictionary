@@ -87,12 +87,12 @@ GdictContext *        gdict_client_context_new          (const gchar        *hos
 
 void                  gdict_client_context_set_hostname (GdictClientContext *context,
 						         const gchar        *hostname);
-G_CONST_RETURN gchar *gdict_client_context_get_hostname (GdictClientContext *context);
+const gchar *         gdict_client_context_get_hostname (GdictClientContext *context);
 void                  gdict_client_context_set_port     (GdictClientContext *context,
 							 gint                port);
 guint                 gdict_client_context_get_port     (GdictClientContext *context);
 void                  gdict_client_context_set_client   (GdictClientContext *context,
 							 const gchar        *client);
-G_CONST_RETURN gchar *gdict_client_context_get_client   (GdictClientContext *context);
+const gchar *         gdict_client_context_get_client   (GdictClientContext *context);
 
 #endif /* __GDICT_CLIENT_CONTEXT_H__ */

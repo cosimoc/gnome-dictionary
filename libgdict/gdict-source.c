@@ -807,7 +807,7 @@ gdict_source_set_name (GdictSource *source,
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_source_get_name (GdictSource *source)
 {
   g_return_val_if_fail (GDICT_IS_SOURCE (source), NULL);
@@ -869,7 +869,7 @@ gdict_source_set_description (GdictSource *source,
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_source_get_description (GdictSource *source)
 {
   g_return_val_if_fail (GDICT_IS_SOURCE (source), NULL);
@@ -931,7 +931,7 @@ gdict_source_set_database (GdictSource *source,
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_source_get_database (GdictSource *source)
 {
   g_return_val_if_fail (GDICT_IS_SOURCE (source), NULL);
@@ -993,7 +993,7 @@ gdict_source_set_strategy (GdictSource *source,
  *
  * Since: 1.0
  */
-G_CONST_RETURN gchar *
+const gchar *
 gdict_source_get_strategy (GdictSource *source)
 {
   g_return_val_if_fail (GDICT_IS_SOURCE (source), NULL);

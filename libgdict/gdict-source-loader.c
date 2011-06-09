@@ -301,7 +301,7 @@ gdict_source_loader_add_search_path (GdictSourceLoader *loader,
  *
  * Since: 1.0
  */
-G_CONST_RETURN GSList *
+const GSList *
 gdict_source_loader_get_paths (GdictSourceLoader *loader)
 {
   g_return_val_if_fail (GDICT_IS_SOURCE_LOADER (loader), NULL);
@@ -470,7 +470,7 @@ gdict_source_loader_get_names (GdictSourceLoader *loader,
  *
  * Since: 1.0
  */
-G_CONST_RETURN GSList *
+const GSList *
 gdict_source_loader_get_sources (GdictSourceLoader *loader)
 {
   g_return_val_if_fail (GDICT_IS_SOURCE_LOADER (loader), NULL);

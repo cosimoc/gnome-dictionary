@@ -87,16 +87,16 @@ gchar *               gdict_source_to_data         (GdictSource           *sourc
 						    
 void                  gdict_source_set_name        (GdictSource           *source,
 						    const gchar           *name);
-G_CONST_RETURN gchar *gdict_source_get_name        (GdictSource           *source);
+const gchar *         gdict_source_get_name        (GdictSource           *source);
 void                  gdict_source_set_description (GdictSource           *source,
 						    const gchar           *description);
-G_CONST_RETURN gchar *gdict_source_get_description (GdictSource           *source);
+const gchar *         gdict_source_get_description (GdictSource           *source);
 void                  gdict_source_set_database    (GdictSource           *source,
 						    const gchar           *database);
-G_CONST_RETURN gchar *gdict_source_get_database    (GdictSource           *source);
+const gchar *         gdict_source_get_database    (GdictSource           *source);
 void                  gdict_source_set_strategy    (GdictSource           *source,
 						    const gchar           *strategy);
-G_CONST_RETURN gchar *gdict_source_get_strategy    (GdictSource           *source);
+const gchar *         gdict_source_get_strategy    (GdictSource           *source);
 void                  gdict_source_set_transport   (GdictSource           *source,
 						    GdictSourceTransport   transport,
 						    const gchar           *first_transport_property,
