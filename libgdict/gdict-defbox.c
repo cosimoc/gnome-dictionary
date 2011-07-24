@@ -379,9 +379,16 @@ exact_prefix_cmp (const gchar *string,
 	/* If string contains prefix, check that prefix is not followed
 	 * by a unicode mark symbol, e.g. that trailing 'a' in prefix
 	 * is not part of two-char a-with-hat symbol in string. */
+
+#if GLIB_CHECK_VERSION(2, 29, 14)
+	return type != G_UNICODE_SPACING_MARK &&
+		type != G_UNICODE_ENCLOSING_MARK &&
+		type != G_UNICODE_NON_SPACING_MARK;
+#else
 	return type != G_UNICODE_COMBINING_MARK &&
 		type != G_UNICODE_ENCLOSING_MARK &&
 		type != G_UNICODE_NON_SPACING_MARK;
+#endif
 }
 
 static const gchar *
