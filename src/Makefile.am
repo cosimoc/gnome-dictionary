@@ -33,18 +33,14 @@ gnome_dictionary_SOURCES = \
 	$(NULL)
 
 gnome_dictionary_CFLAGS = \
-	-I$(top_builddir)/gnome-dictionary	\
-	-I$(top_srcdir)/gnome-dictionary	\
-	$(GLIB_CFLAGS)				\
-	$(GIO_CFLAGS)				\
-	$(GTK_CFLAGS)				\
+	-I$(top_builddir)	\
+	-I$(top_srcdir)		\
+	$(GDICT_CFLAGS)		\
 	$(NULL)
 
 gnome_dictionary_LDADD = \
 	-lm			\
-	$(top_builddir)/gnome-dictionary/libgdict/libgdict-1.0.la \
-	$(GLIB_LIBS)		\
-	$(GIO_LIBS)		\
-	$(GTK_LIBS)		\
+	$(top_builddir)/libgdict/libgdict-1.0.la \
+	$(GDICT_LIBS)		\
 	$(NULL)
 

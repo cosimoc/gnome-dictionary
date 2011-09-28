@@ -5,7 +5,7 @@ INCLUDES = -DG_LOG_DOMAIN=\"Gdict\" 				\
 	-DLIBDIR=\""$(libdir)"\" 				\
 	-DSYSCONFDIR=\""$(sysconfdir)"\" 			\
 	-DPREFIX=\""$(prefix)"\" 				\
-	-DGNOMELOCALEDIR=\""$(gnomeutilslocaledir)"\" 		\
+	-DGNOMELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\"  \
 	-DGDICTSOURCESDIR=\""$(datadir)/gdict-1.0/sources"\" 	\
 	-DGDICT_ENABLE_INTERNALS=1 				\
 	-DG_DISABLE_DEPRECATED					\
@@ -59,14 +59,12 @@ libgdict_1_0_la_SOURCES = \
 	$(sources_c)
 
 libgdict_1_0_la_CPPFLAGS = \
-	$(GLIB_CFLAGS)		\
-	$(GTK_CFLAGS)		\
+	$(GDICT_CFLAGS)		\
 	$(GDICT_DEBUG_CFLAGS)	\
 	$(MAINTAINER_CFLAGS)
 
 libgdict_1_0_la_LIBADD = \
-	$(GLIB_LIBS)		\
-	$(GTK_LIBS)
+	$(GDICT_LIBS)
 
 libgdict_1_0_la_LDFLAGS  = \
 	-version-info $(LIBGDICT_LT_VERSION)	\

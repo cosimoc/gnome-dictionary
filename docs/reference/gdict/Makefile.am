@@ -26,8 +26,8 @@ MKDB_OPTIONS=--sgml-mode --output-format=xml
 FIXXREF_OPTIONS=
 
 # Used for dependencies.
-HFILE_GLOB=$(top_srcdir)/gnome-dictionary/libgdict/*.h
-CFILE_GLOB=$(top_srcdir)/gnome-dictionary/libgdict/*.c
+HFILE_GLOB=$(top_srcdir)/libgdict/*.h
+CFILE_GLOB=$(top_srcdir)/libgdict/*.c
 
 # Header files to ignore when scanning.
 IGNORE_HFILES =			\
@@ -53,15 +53,13 @@ extra_files =
 GTKDOC_CFLAGS =					\
 	$(CFLAGS)				\
 	$(CPPFLAGS)				\
-	$(GLIB_CFLAGS)				\
-	$(GTK_CFLAGS)				\
+	$(GDICT_CFLAGS)				\
 	-I$(srcdir)/../../../libgdict		\
-	-I$(top_builddir)/gnome-dictionary/libgdict
+	-I$(top_builddir)/libgdict
 
 GTKDOC_LIBS =						\
 	$(LDFLAGS)					\
-	$(GLIB_LIBS)					\
-	$(GTK_LIBS)					\
+	$(GDICT_LIBS)					\
 	../../../libgdict/libgdict-1.0.la
 
 include $(top_srcdir)/gtk-doc.make
